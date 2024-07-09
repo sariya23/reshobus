@@ -10,5 +10,9 @@ class ValidationErrorUserTemplate(EquationCreateException):
     pass
 
 
+class NoSpecSigns(ValidationErrorUserTemplate):
+    pass
+
+
 class UnexpectedConstant(ValidationErrorUserTemplate):
     pass
