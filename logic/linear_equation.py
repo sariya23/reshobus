@@ -12,10 +12,6 @@ class Difficult(Enum):
 
 
 class LinearEquation(Equation):
-    def __init__(self, equation_template: str = "", *constants):
-        self.equation_template = equation_template
-        self.constants = constants
-
     @classmethod
     def from_template_with_concrete_difficult(cls, difficult: Difficult):
         match difficult:

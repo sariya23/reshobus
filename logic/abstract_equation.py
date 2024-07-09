@@ -4,9 +4,9 @@ from abc import ABC, abstractmethod
 class Equation(ABC):
     UNKNOWN_VALUE = "x"
 
-    @abstractmethod
-    def __init__(self):
-        pass
+    def __init__(self, equation_template: str = "", *constants):
+        self.equation_template = equation_template
+        self.constants = constants
 
     @abstractmethod
     def generate(self):
