@@ -13,5 +13,9 @@ class Equation(ABC):
         pass
 
     @abstractmethod
+    def clean_equation(self) -> str:
+        pass
+
+    @abstractmethod
     def __str__(self):
         pass
