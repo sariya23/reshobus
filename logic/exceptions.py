@@ -4,3 +4,11 @@ class EquationCreateException(BaseException):
 
 class UndefinedDifficultException(EquationCreateException):
     pass
+
+
+class ValidationErrorUserTemplate(EquationCreateException):
+    pass
+
+
+class UnexpectedConstant(ValidationErrorUserTemplate):
+    pass
