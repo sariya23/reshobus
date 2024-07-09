@@ -14,10 +14,10 @@ class LinearConstant:
 
 
 class LinearTemplates:
-    EASY_LINEAR = LinearEquation("a<sign>x=answer", LinearConstant.EASY_CONSTANT)
+    EASY_LINEAR = LinearEquation("a <sign> x = answer", LinearConstant.EASY_CONSTANT)
     MEDIUM_LINEAR = LinearEquation(
-        "a<sign>(b<sign>x)=answer", LinearConstant.MEDIUM_CONSTANT
+        "a <sign> ( b <sign> x ) = answer", LinearConstant.MEDIUM_CONSTANT
     )
     HARD_LINEAR = LinearEquation(
-        "(a<sign>x)<sign>(b<sign>d)=answer", LinearConstant.HARD_CONSTANT
+        "( a <sign> x ) <sign> ( b <sign> d ) = answer", LinearConstant.HARD_CONSTANT
     )
