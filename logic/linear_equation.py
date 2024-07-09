@@ -1,5 +1,6 @@
 from .abstract_equation import Equation
 from .templates import Templates
+from .exceptions import UndefinedDifficultException
 
 from enum import Enum
 
@@ -18,13 +19,13 @@ class LinearEquation(Equation):
     def from_template_with_concrete_difficult(cls, difficult: Difficult):
         match difficult:
             case Difficult.EASY:
-                return cls(Templates.EASY_LINEAR.value)
+                return cls(Templates.EASY_LINEAR)
             case Difficult.MEDIUM:
-                return cls(Templates.MEDIUM_LINEAR.value)
+                return cls(Templates.MEDIUM_LINEAR)
             case Difficult.HARD:
-                return cls(Templates.HARD_LINEAR.value)
+                return cls(Templates.HARD_LINEAR)
             case _:
-                raise ValueError(f"Undefined difficult {difficult}")
+                raise UndefinedDifficultException(f"Undefined difficult {difficult}")
 
     def generate(self):
         pass
