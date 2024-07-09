@@ -1,6 +1,6 @@
 from .abstract_equation import Equation
 from .templates import LinearTemplates
-from .exceptions import UndefinedDifficultException
+from .exceptions import UndefinedDifficultException, UnexpectedConstant, NoSpecSigns
 
 from enum import Enum
 
@@ -36,6 +36,23 @@ class LinearEquation(Equation):
                 )
             case _:
                 raise UndefinedDifficultException(f"Undefined difficult {difficult}")
+
+    @classmethod
+    def from_user_template(cls, user_template: str, *constants):
+        equation_constants = user_template.split()
+
+        if "=" not in equation_constants or "<sign>" not in equation_constants:
+            raise NoSpecSigns(
+                "Please check guide for user template <here(url)>.\nYou are not specify one 'equal' sign or math sign"
+            )
+
+        equation_blocks = [
+            block for block in equation_constants if block not in ("<sign>", "=")
+        ]
+
+        for constant in constants:
+            if constant not in equation_blocks:
+                raise UnexpectedConstant(f"Unexpected constant: {constant}")
 
     def generate(self):
         pass
