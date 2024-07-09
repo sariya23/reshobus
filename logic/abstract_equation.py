@@ -8,12 +8,10 @@ class Equation(ABC):
         self.equation_template = equation_template
         self.constants = constants
 
-    @abstractmethod
-    def generate(self):
-        pass
+        self.equation = self.generate()
 
     @abstractmethod
-    def clean_equation(self) -> str:
+    def generate(self):
         pass
 
     @abstractmethod
