@@ -42,6 +42,7 @@ class LinearEquation(Equation):
         for _ in range(amount_of_sign):
             equation = equation.replace("<sign>", choice(self.OPERATORS), 1)
 
+        assert "<sign>" not in equation
         return equation
 
     def generate(self) -> str:
