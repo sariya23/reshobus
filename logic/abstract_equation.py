@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
 
+from sympy import symbols
+
 
 class Equation(ABC):
-    UNKNOWN_VALUE = "x"
+    UNKNOWN_VALUE = symbols("x")
 
     def __init__(self, equation_template: str = "", *constants):
         self.equation_template = equation_template
