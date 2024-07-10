@@ -14,8 +14,8 @@ class Equation(ABC):
 
         self.equation = self.generate()
 
-    def __replace_spec_signs_to_math_signs(self):
-        amount_of_sign = self.equation_template.count("<sign>")
+    def __replace_spec_signs_to_math_signs(self, equation: str) -> str:
+        amount_of_sign = equation.count("<sign>")
         equation = self.equation_template
 
         for _ in range(amount_of_sign):
@@ -24,8 +24,9 @@ class Equation(ABC):
         assert "<sign>" not in equation
         return equation
 
-    def __replace_letter_coefficients_to_numbers(self):
-        equation = self.equation_template
+    @staticmethod
+    def __replace_letter_coefficients_to_numbers(self, equation: str):
+        equation = equation
 
         for constant in self.constants:
             coefficient = randint(1, 100)
@@ -35,7 +36,10 @@ class Equation(ABC):
 
     @abstractmethod
     def generate(self):
-        pass
+        equation = self.__replace_spec_signs_to_math_signs(self.equation_template)
+        equation = self.__replace_letter_coefficients_to_numbers(equation)
+
+        return equation
 
     @abstractmethod
     def __str__(self):

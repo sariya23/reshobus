@@ -39,3 +39,27 @@ class LinearEquation(Equation):
 
     def __str__(self):
         pass
+
+
+# import sympy as sp
+#
+# # Определяем переменную x
+# x = sp.symbols('x')
+#
+# # Уравнение в виде строки
+# equation_str = "2*x=6"
+#
+# # Разбиваем строку на левую и правую часть
+# left_str, right_str = equation_str.split('=')
+#
+# # Преобразуем части уравнения из строк в символьные выражения
+# left_expr = sp.sympify(left_str)
+# right_expr = sp.sympify(right_str)
+#
+# # Создаем уравнение
+# equation = sp.Eq(left_expr, right_expr)
+#
+# # Решаем уравнение
+# solution = sp.solve(equation, x)
+#
+# print(f"Решение уравнения: x = {solution[0]}")
