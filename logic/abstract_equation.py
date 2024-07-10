@@ -26,8 +26,6 @@ class Equation(ABC):
 
     @staticmethod
     def __replace_letter_coefficients_to_numbers(self, equation: str):
-        equation = equation
-
         for constant in self.constants:
             coefficient = randint(1, 100)
             equation = equation.replace(constant, str(coefficient), 1)
