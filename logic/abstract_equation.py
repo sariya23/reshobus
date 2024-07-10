@@ -32,10 +32,13 @@ class Equation(ABC):
 
         return equation
 
-    @abstractmethod
     def generate(self) -> str:
-        equation = self.__replace_spec_signs_to_math_signs(self.equation_template)
-        equation = self.__replace_letter_coefficients_to_numbers(equation)
+        equation_with_replaced_spec_sign = self.__replace_spec_signs_to_math_signs(
+            self.equation_template
+        )
+        equation = self.__replace_letter_coefficients_to_numbers(
+            equation_with_replaced_spec_sign
+        )
 
         return equation
 
