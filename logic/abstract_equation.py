@@ -25,7 +25,7 @@ class Equation(ABC):
         return equation
 
     @staticmethod
-    def __replace_letter_coefficients_to_numbers(self, equation: str):
+    def __replace_letter_coefficients_to_numbers(self, equation: str) -> str:
         for constant in self.constants:
             coefficient = randint(1, 100)
             equation = equation.replace(constant, str(coefficient), 1)
@@ -33,7 +33,7 @@ class Equation(ABC):
         return equation
 
     @abstractmethod
-    def generate(self):
+    def generate(self) -> str:
         equation = self.__replace_spec_signs_to_math_signs(self.equation_template)
         equation = self.__replace_letter_coefficients_to_numbers(equation)
 
