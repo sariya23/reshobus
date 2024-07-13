@@ -19,5 +19,5 @@ class LinearTemplates:
         "a<sign>(b<sign>x)=answer", LinearConstant.MEDIUM_CONSTANT
     )
     HARD_LINEAR = LinearEquation(
-        "(a<sign>x)<sign>(b<sign>d)=answer", LinearConstant.HARD_CONSTANT
+        "(a<sign>x)<sign>(b<sign>c)=answer", LinearConstant.HARD_CONSTANT
     )
