@@ -21,7 +21,6 @@ class Equation(ABC):
         for _ in range(amount_of_sign):
             equation = equation.replace("<sign>", choice(self.OPERATORS), 1)
 
-        assert "<sign>" not in equation
         return equation
 
     def __replace_letter_coefficients_to_numbers(self, equation: str) -> str:
