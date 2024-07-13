@@ -34,9 +34,6 @@ class LinearEquation(Equation):
             case _:
                 raise UndefinedDifficultException(f"Undefined difficult {difficult}")
 
-    def generate(self) -> str:
-        pass
-
     def __str__(self):
         pass
 
