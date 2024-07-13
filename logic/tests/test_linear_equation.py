@@ -50,7 +50,8 @@ def test_undefined_difficult_raises_exception():
     ],
 )
 def test_after_generating_no_spec_signs_and_letters_in_equation(difficult):
-    eq = LinearEquation().from_template_with_concrete_difficult(difficult).equation
-    constant_names = ascii_letters.replace("x", "")
-    assert "<sign>" not in eq
-    assert all(i not in constant_names for i in eq)
+    eq_object = LinearEquation().from_template_with_concrete_difficult(difficult)
+    equation = eq_object.equation
+    constant_names = ascii_letters.replace(eq_object.UNKNOWN_STRING, "")
+    assert eq_object.SPEC_SIGN not in equation
+    assert all(i not in constant_names for i in equation)

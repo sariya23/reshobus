@@ -5,8 +5,10 @@ from sympy import symbols
 
 
 class Equation(ABC):
-    UNKNOWN_VALUE = symbols("x")
+    UNKNOWN_STRING = "x"
+    UNKNOWN_SYMBOL = symbols(UNKNOWN_STRING)
     OPERATORS = ("+", "-", "*", "/")
+    SPEC_SIGN = "<sign>"
 
     def __init__(self, equation_template: str = "", *constants):
         self.equation_template = equation_template
@@ -15,11 +17,11 @@ class Equation(ABC):
         self.equation = self.generate()
 
     def __replace_spec_signs_to_math_signs(self, equation: str) -> str:
-        amount_of_sign = equation.count("<sign>")
+        amount_of_sign = equation.count(self.SPEC_SIGN)
         equation = self.equation_template
 
         for _ in range(amount_of_sign):
-            equation = equation.replace("<sign>", choice(self.OPERATORS), 1)
+            equation = equation.replace(self.SPEC_SIGN, choice(self.OPERATORS), 1)
 
         return equation
 
