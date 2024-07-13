@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
 from random import choice, randint
 
-from sympy import symbols
+import sympy as sp
 
 
 class Equation(ABC):
     UNKNOWN_STRING = "x"
-    UNKNOWN_SYMBOL = symbols(UNKNOWN_STRING)
+    UNKNOWN_SYMBOL = sp.symbols(UNKNOWN_STRING)
     OPERATORS = ("+", "-", "*", "/")
     SPEC_SIGN = "<sign>"
 
@@ -40,6 +40,14 @@ class Equation(ABC):
             equation_with_replaced_spec_sign
         )
         return equation
+
+    def solve(self):
+        lest_side, right_side = self.equation.split("=")
+        left_expression = sp.sympify(lest_side)
+        right_expression = sp.sympify(right_side)
+        equation = sp.Eq(left_expression, right_expression)
+        solution = sp.solve(equation, self.UNKNOWN_SYMBOL)
+        return solution
 
     @abstractmethod
     def __str__(self):

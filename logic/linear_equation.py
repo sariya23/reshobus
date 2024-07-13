@@ -1,6 +1,6 @@
-from .abstract_equation import Equation
-from .templates import LinearTemplates
-from .exceptions import UndefinedDifficultException
+from abstract_equation import Equation
+from templates import LinearTemplates
+from exceptions import UndefinedDifficultException
 
 
 from enum import Enum
@@ -13,6 +13,10 @@ class Difficult(Enum):
 
 
 class LinearEquation(Equation):
+    def __init__(self, equation_template: str = "", *constants):
+        super().__init__(equation_template, *constants)
+        self.answer = self.solve()[0]
+
     @classmethod
     def from_template_with_concrete_difficult(cls, difficult: Difficult):
         match difficult:
@@ -38,25 +42,7 @@ class LinearEquation(Equation):
         pass
 
 
-# import sympy as sp
-#
-# # Определяем переменную x
-# x = sp.symbols('x')
-#
-# # Уравнение в виде строки
-# equation_str = "2*x=6"
-#
-# # Разбиваем строку на левую и правую часть
-# left_str, right_str = equation_str.split('=')
-#
-# # Преобразуем части уравнения из строк в символьные выражения
-# left_expr = sp.sympify(left_str)
-# right_expr = sp.sympify(right_str)
-#
-# # Создаем уравнение
-# equation = sp.Eq(left_expr, right_expr)
-#
-# # Решаем уравнение
-# solution = sp.solve(equation, x)
-#
-# print(f"Решение уравнения: x = {solution[0]}")
+if __name__ == "__main__":
+    eq = LinearEquation.from_template_with_concrete_difficult(Difficult.EASY)
+    print(eq.equation)
+    print(eq.solve())
