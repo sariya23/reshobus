@@ -24,7 +24,6 @@ class Equation(ABC):
         assert "<sign>" not in equation
         return equation
 
-    @staticmethod
     def __replace_letter_coefficients_to_numbers(self, equation: str) -> str:
         for constant in self.constants:
             coefficient = randint(1, 100)
@@ -39,7 +38,6 @@ class Equation(ABC):
         equation = self.__replace_letter_coefficients_to_numbers(
             equation_with_replaced_spec_sign
         )
-
         return equation
 
     @abstractmethod
