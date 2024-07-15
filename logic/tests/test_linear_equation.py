@@ -2,7 +2,7 @@ import pytest
 
 from string import ascii_letters
 
-from logic.linear_equation import LinearEquation, Difficult
+from logic.equation.linear_equation import LinearEquation, Difficult
 from logic.templates import LinearTemplates
 from logic.exceptions import UndefinedDifficultException
 

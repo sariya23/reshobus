@@ -1,6 +1,6 @@
-from abstract_equation import Equation
-from templates import LinearTemplates
-from exceptions import UndefinedDifficultException
+from logic.equation.abstract_equation import Equation
+from logic.templates import LinearTemplates
+from logic.exceptions import UndefinedDifficultException
 
 
 from enum import Enum
