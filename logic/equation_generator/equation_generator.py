@@ -45,7 +45,7 @@ class EquationGenerator:
         latex_equation = f"${latex_equation}$"
         return latex_equation
 
-    def add_equation_with_number(self, doc, equation, number):
+    def __add_equation_with_number(self, doc, equation, number):
         latex_equation = self.__convert_python_string_to_latex(str(equation))
         image_filename = f"equation_{number}.png"
         self.__create_equation_image(latex_equation, image_filename)
@@ -67,7 +67,7 @@ class EquationGenerator:
         )
 
         for i, equation in enumerate(equations, 1):
-            self.add_equation_with_number(doc, equation.equation, i)
+            self.__add_equation_with_number(doc, equation.equation, i)
             doc.add_paragraph()
         doc.save(filename)
         self.delete_all_pngs()
@@ -79,7 +79,7 @@ class EquationGenerator:
         doc.add_heading("Ответы для уравнений", level=1)
 
         for i, equation in enumerate(equations, 1):
-            self.add_equation_with_number(doc, equation.answer, i)
+            self.__add_equation_with_number(doc, equation.answer, i)
             doc.add_paragraph()
         doc.save(filename)
         self.delete_all_pngs()
