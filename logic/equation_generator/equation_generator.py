@@ -9,6 +9,8 @@ from logic.equation.linear_equation import LinearEquation, Difficult
 
 
 class EquationGenerator:
+    PATH_TO_SAVE_DIR = os.path.join(os.getcwd(), "tmp")
+
     def __init__(self, difficult: Difficult, quantity_of_equations: int = 10):
         self.quantity_of_equations = quantity_of_equations
         self.difficult = difficult
@@ -69,7 +71,7 @@ class EquationGenerator:
         for i, equation in enumerate(equations, 1):
             self.__add_equation_with_number(doc, equation.equation, i)
             doc.add_paragraph()
-        doc.save(filename)
+        doc.save(os.path.join(self.PATH_TO_SAVE_DIR, filename))
         self.delete_all_pngs()
 
     def generate_answers_to_docx_file(
@@ -81,7 +83,7 @@ class EquationGenerator:
         for i, equation in enumerate(equations, 1):
             self.__add_equation_with_number(doc, equation.answer, i)
             doc.add_paragraph()
-        doc.save(filename)
+        doc.save(os.path.join(self.PATH_TO_SAVE_DIR, filename))
         self.delete_all_pngs()
 
 
