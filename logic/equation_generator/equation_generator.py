@@ -48,8 +48,22 @@ class EquationGenerator:
 
         doc.save(filename)
 
+    def generate_answers(
+        self, equations: list[LinearEquation], filename: str = "answers.doc"
+    ):
+        doc = Document()
+        doc.add_heading("Ответы для уравнений", level=1)
 
-if __name__ == "__main__":
-    generator = EquationGenerator(difficult=Difficult.EASY, quantity_of_equations=5)
-    equations = generator.generate_equations()
-    generator.generate_equations_word(equations)
+        for equation in equations:
+            latex_equation = self.__convert_python_string_to_latex(str(equation.answer))
+            image_filename = "answer.png"
+            self.__create_equation_image(latex_equation, image_filename)
+            doc.add_picture(image_filename, width=Inches(2))
+
+        doc.save(filename)
+
+
+g = EquationGenerator(difficult=Difficult.EASY, quantity_of_equations=20)
+eq = g.generate_equations()
+g.generate_equations_to_docx_file(eq)
+g.generate_answers(eq)
