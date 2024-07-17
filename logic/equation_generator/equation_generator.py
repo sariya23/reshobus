@@ -32,7 +32,7 @@ class EquationGenerator:
         latex_equation = f"${latex_equation}$"
         return latex_equation
 
-    def generate_equations_word(
+    def generate_equations_to_docx_file(
         self, equations: list[LinearEquation], filename: str = "equation.doc"
     ) -> None:
         doc = Document()
