@@ -2,6 +2,7 @@ from logic.equation.linear_equation import LinearEquation, Difficult
 import matplotlib.pyplot as plt
 from docx import Document
 from docx.shared import Inches
+import os
 
 
 class EquationGenerator:
@@ -15,6 +16,15 @@ class EquationGenerator:
             for _ in range(self.quantity_of_equations)
         ]
         return equations
+
+    @staticmethod
+    def delete_all_pngs():
+        current_directory = os.getcwd()
+        files = os.listdir(current_directory)
+        for file in files:
+            if file.endswith(".png"):
+                os.remove(os.path.join(current_directory, file))
+                print(f"Удален файл: {file}")
 
     @staticmethod
     def __create_equation_image(
@@ -32,6 +42,19 @@ class EquationGenerator:
         latex_equation = f"${latex_equation}$"
         return latex_equation
 
+    def add_equation_with_number(self, doc, equation, number):
+        latex_equation = self.__convert_python_string_to_latex(str(equation))
+        image_filename = f"equation_{number}.png"
+        self.__create_equation_image(latex_equation, image_filename)
+
+        table = doc.add_table(rows=1, cols=2)
+        table.style = "Table Grid"
+        row = table.rows[0].cells
+        row[0].text = f"{number}"
+        paragraph = row[1].paragraphs[0]
+        run = paragraph.add_run()
+        run.add_picture(image_filename, width=Inches(2))
+
     def generate_equations_to_docx_file(
         self, equations: list[LinearEquation], filename: str = "equation.doc"
     ) -> None:
@@ -40,13 +63,11 @@ class EquationGenerator:
             f"Уравнения с уровнем сложности {self.difficult.value}", level=1
         )
 
-        for equation in equations:
-            latex_equation = self.__convert_python_string_to_latex(equation.equation)
-            image_filename = "equation.png"
-            self.__create_equation_image(latex_equation, image_filename)
-            doc.add_picture(image_filename, width=Inches(2))
-
+        for i, equation in enumerate(equations, 1):
+            self.add_equation_with_number(doc, equation.equation, i)
+            doc.add_paragraph()
         doc.save(filename)
+        self.delete_all_pngs()
 
     def generate_answers_to_docx_file(
         self, equations: list[LinearEquation], filename: str = "answers.doc"
@@ -54,13 +75,11 @@ class EquationGenerator:
         doc = Document()
         doc.add_heading("Ответы для уравнений", level=1)
 
-        for equation in equations:
-            latex_answer = self.__convert_python_string_to_latex(str(equation.answer))
-            image_filename = "answer.png"
-            self.__create_equation_image(latex_answer, image_filename)
-            doc.add_picture(image_filename, width=Inches(2))
-
+        for i, equation in enumerate(equations, 1):
+            self.add_equation_with_number(doc, equation.answer, i)
+            doc.add_paragraph()
         doc.save(filename)
+        self.delete_all_pngs()
 
 
 g = EquationGenerator(difficult=Difficult.EASY, quantity_of_equations=20)
