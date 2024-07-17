@@ -1,4 +1,7 @@
 from logic.equation.linear_equation import LinearEquation, Difficult
+import matplotlib.pyplot as plt
+from docx import Document
+from docx.shared import Inches
 
 
 class EquationGenerator:
@@ -13,34 +16,40 @@ class EquationGenerator:
         ]
         return equations
 
-    def generate_equations_pdf(self, equation: LinearEquation) -> None:
-        pass
-
-
-if __name__ == "__main__":
-    import matplotlib.pyplot as plt
-    from docx import Document
-    from docx.shared import Inches
-
-    def create_equation_image(latex, filename):
+    @staticmethod
+    def __create_equation_image(
+        equation: str, filename: str = "equation_image.png"
+    ) -> None:
         fig, ax = plt.subplots(figsize=(2, 1))
-        ax.text(0.5, 0.5, f"${latex}$", fontsize=20, ha="center", va="center")
+        ax.text(0.5, 0.5, f"{equation}", fontsize=20, ha="center", va="center")
         ax.axis("off")
         plt.savefig(filename, bbox_inches="tight")
         plt.close()
 
-    def create_word_with_equations(doc_filename):
+    @staticmethod
+    def __convert_python_string_to_latex(equation: str) -> str:
+        latex_equation = equation.replace("*", r"\cdot ")
+        latex_equation = f"${latex_equation}$"
+        return latex_equation
+
+    def generate_equations_word(
+        self, equations: list[LinearEquation], filename: str = "equation.doc"
+    ) -> None:
         doc = Document()
-        doc.add_heading("Equation Example", level=1)
+        doc.add_heading(
+            f"Уравнения с уровнем сложности {self.difficult.value}", level=1
+        )
 
-        # Добавление уравнения как изображения
-        latex_equation = r"\alpha = 0.5"
-        image_filename = "equation.png"
-        create_equation_image(latex_equation, image_filename)
+        for equation in equations:
+            latex_equation = self.__convert_python_string_to_latex(equation.equation)
+            image_filename = "equation.png"
+            self.__create_equation_image(latex_equation, image_filename)
+            doc.add_picture(image_filename, width=Inches(2))
 
-        doc.add_paragraph("Here is an equation:")
-        doc.add_picture(image_filename, width=Inches(2))
+        doc.save(filename)
 
-        doc.save(doc_filename)
 
-    create_word_with_equations("example.docx")
+if __name__ == "__main__":
+    generator = EquationGenerator(difficult=Difficult.EASY, quantity_of_equations=5)
+    equations = generator.generate_equations()
+    generator.generate_equations_word(equations)
