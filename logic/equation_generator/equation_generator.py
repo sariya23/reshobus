@@ -85,7 +85,8 @@ class EquationGenerator:
         self.delete_all_pngs()
 
 
-g = EquationGenerator(difficult=Difficult.EASY, quantity_of_equations=20)
-eq = g.generate_equations()
-g.generate_equations_to_docx_file(eq)
-g.generate_answers_to_docx_file(eq)
+if __name__ == "__main__":
+    g = EquationGenerator(difficult=Difficult.EASY, quantity_of_equations=20)
+    eq = g.generate_equations()
+    g.generate_equations_to_docx_file(eq)
+    g.generate_answers_to_docx_file(eq)
