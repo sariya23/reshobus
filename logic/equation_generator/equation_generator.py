@@ -1,8 +1,11 @@
-from logic.equation.linear_equation import LinearEquation, Difficult
+import os
+
 import matplotlib.pyplot as plt
 from docx import Document
+
+
 from docx.shared import Inches
-import os
+from logic.equation.linear_equation import LinearEquation, Difficult
 
 
 class EquationGenerator:
