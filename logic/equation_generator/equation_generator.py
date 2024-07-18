@@ -72,6 +72,10 @@ class EquationGenerator:
             for i, equation in enumerate(equations, 1):
                 self.__add_equation_with_number(doc, equation.equation, i)
                 doc.add_paragraph()
+
+            if not os.path.exists(self.PATH_TO_SAVE_DIR):
+                os.makedirs(self.PATH_TO_SAVE_DIR)
+
             doc.save(os.path.join(self.PATH_TO_SAVE_DIR, filename))
         finally:
             self.delete_all_pngs()
@@ -86,6 +90,10 @@ class EquationGenerator:
             for i, equation in enumerate(equations, 1):
                 self.__add_equation_with_number(doc, equation.answer, i)
                 doc.add_paragraph()
+
+            if not os.path.exists(self.PATH_TO_SAVE_DIR):
+                os.makedirs(self.PATH_TO_SAVE_DIR)
+
             doc.save(os.path.join(self.PATH_TO_SAVE_DIR, filename))
         finally:
             self.delete_all_pngs()
