@@ -60,7 +60,7 @@ class EquationGenerator:
         run = paragraph.add_run()
         run.add_picture(image_filename, width=Inches(2))
 
-    def generate_equations_to_docx_file(
+    def generate_equations_to_doc_file(
         self, equations: list[LinearEquation], filename: str = "equation.doc"
     ) -> None:
         doc = Document()
@@ -74,7 +74,7 @@ class EquationGenerator:
         doc.save(os.path.join(self.PATH_TO_SAVE_DIR, filename))
         self.delete_all_pngs()
 
-    def generate_answers_to_docx_file(
+    def generate_answers_to_doc_file(
         self, equations: list[LinearEquation], filename: str = "answers.doc"
     ):
         doc = Document()
@@ -90,5 +90,5 @@ class EquationGenerator:
 if __name__ == "__main__":
     g = EquationGenerator(difficult=Difficult.EASY, quantity_of_equations=20)
     eq = g.generate_equations()
-    g.generate_equations_to_docx_file(eq)
-    g.generate_answers_to_docx_file(eq)
+    g.generate_equations_to_doc_file(eq)
+    g.generate_answers_to_doc_file(eq)
