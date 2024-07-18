@@ -3,8 +3,9 @@ import os
 import pytest
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def remove_tmp_dir_after_test():
+    yield
     path_to_tmp_dir = os.path.join(os.getcwd(), "tmp")
     try:
         if os.path.exists(path_to_tmp_dir):
